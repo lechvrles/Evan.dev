@@ -40,6 +40,7 @@ const STEP3_HTML = `
       <button class="btn-primary" id="submitBtn" onclick="submitForm()" disabled>
         <span>ثبت اطلاعات</span>
       </button>
+      <div class="submit-error" id="submitError"></div>
     </div>
   </div>
 `;
