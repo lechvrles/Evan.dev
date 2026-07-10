@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>پنل مشاوره</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app" id="app">
+
+  <div class="stepper" id="stepper">
+    <span class="mono" id="stepLabel">STEP 01/02</span>
+    <div class="dots">
+      <div class="dot" data-i="1"></div>
+      <div class="dot" data-i="2"></div>
+    </div>
+  </div>
+
+  <div class="step-screen" id="step1"></div>
+  <div class="step-screen hidden-step" id="step2"></div>
+  <div class="step-screen hidden-step" id="step3"></div>
+  <div class="step-screen hidden-step" id="step4"></div>
+
+</div>
+
+<link rel="stylesheet" href="https://static.neshan.org/sdk/leaflet/v1.9.4/neshan-sdk/v1.0.8/index.css"/>
+<script src="https://static.neshan.org/sdk/leaflet/v1.9.4/neshan-sdk/v1.0.8/index.js"></script>
+
+<script src="js/step1.js"></script>
+<script src="js/step2.js"></script>
+<script src="js/step3.js"></script>
+<script src="js/step4.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
