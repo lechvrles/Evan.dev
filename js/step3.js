@@ -38,7 +38,7 @@ const STEP3_HTML = `
 
     <div class="form-footer">
       <button class="btn-primary" id="submitBtn" onclick="submitForm()" disabled>
-        <span>ثبت اطلاعات</span>
+        <span id="submitBtnText">ثبت اطلاعات</span>
       </button>
       <div class="submit-error" id="submitError"></div>
     </div>
