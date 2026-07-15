@@ -38,6 +38,26 @@ module.exports = async (req, res) => {
        RETURNING id, created_at`,
       [name.trim(), phone.trim(), project.trim(), location.lat, location.lng, days, slots]
     );
+    const insertedId = result.rows[0].id;
+    const createdAt = result.rows[0].created_at;
+    const n8nWebhookUrl = 'https://evantech.runflare.run/webhook-test/new_user';
+
+    fetch(n8nWebhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: insertedId,
+        name: name.trim(),
+        phone: phone.trim(),
+        project: project.trim(),
+        location: location,
+        days: days,
+        slots: slots,
+        created_at: createdAt
+      }),
+    }).catch(err => console.error('خطا در ارسال اطلاعات به n8n:', err.message));
     res.status(201).json({ ok: true, id: result.rows[0].id });
   } catch (err) {
     console.error('خطا در ثبت اطلاعات:', err.message);

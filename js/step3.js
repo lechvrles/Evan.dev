@@ -99,8 +99,8 @@ async function submitForm(){
     document.getElementById('sumName').textContent = state.name;
     document.getElementById('sumPhone').textContent = state.phone;
     document.getElementById('sumProject').textContent = state.project;
-    document.getElementById('sumTime').textContent =
-      payload.days.join('، ') + ' — ' + payload.slots.join('، ');
+//    document.getElementById('sumTime').textContent =
+//      payload.days.join('، ') + ' — ' + payload.slots.join('، ');
 
     goToStep(4);
   } catch (err) {

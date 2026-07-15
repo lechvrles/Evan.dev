@@ -21,7 +21,7 @@ function updateStepper(step){
   if(step === 1){ stepper.classList.remove('show'); return; }
   stepper.classList.add('show');
   const idx = step - 1;
-  label.textContent = 'STEP 0' + idx + '/02';
+  label.textContent = 'STEP 0' + idx + '/03';
   document.querySelectorAll('.dot').forEach(d=>{
     const i = parseInt(d.dataset.i);
     d.classList.toggle('active', i === idx);

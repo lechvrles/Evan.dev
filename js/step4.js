@@ -1,6 +1,7 @@
 // ================= STEP 4 : SUCCESS =================
 // قالب HTML انیمیشن تاییدیه + کارت خلاصه اطلاعات.
 // مقداردهی sumName/sumPhone/... در تابع submitForm (step3.js) انجام می‌شه.
+//      <div class="summary-row"><span class="k">زمان تماس</span><span class="v rtl-v" id="sumTime">—</span></div>
 
 const STEP4_HTML = `
   <div class="success-wrap">
@@ -17,7 +18,6 @@ const STEP4_HTML = `
       <div class="summary-row"><span class="k">نام</span><span class="v rtl-v" id="sumName">—</span></div>
       <div class="summary-row"><span class="k">تلفن</span><span class="v" id="sumPhone">—</span></div>
       <div class="summary-row"><span class="k">پروژه</span><span class="v rtl-v" id="sumProject">—</span></div>
-      <div class="summary-row"><span class="k">زمان تماس</span><span class="v rtl-v" id="sumTime">—</span></div>
     </div>
   </div>
 `;
