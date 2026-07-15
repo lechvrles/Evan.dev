@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
     );
     const insertedId = result.rows[0].id;
     const createdAt = result.rows[0].created_at;
-    const n8nWebhookUrl = 'https://evantech.runflare.run/webhook-test/new_user';
+    const n8nWebhookUrl = 'https://evantech.runflare.run/webhook-test/new_data';
 
     fetch(n8nWebhookUrl, {
       method: 'POST',
