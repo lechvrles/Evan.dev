@@ -31,6 +31,8 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, error: 'حداقل یک بازه زمانی رو انتخاب کنید' });
   }
 
+  let insertedId, createdAt;
+
   try {
     const result = await pool.query(
       `INSERT INTO signups (full_name, phone, project_name, location_lat, location_lng, preferred_days, preferred_slots)
@@ -38,29 +40,31 @@ module.exports = async (req, res) => {
        RETURNING id, created_at`,
       [name.trim(), phone.trim(), project.trim(), location.lat, location.lng, days, slots]
     );
-    const insertedId = result.rows[0].id;
-    const createdAt = result.rows[0].created_at;
-    const n8nWebhookUrl = 'https://evantech.runflare.run/webhook/new_data';
-
-    fetch(n8nWebhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id: insertedId,
-        name: name.trim(),
-        phone: phone.trim(),
-        project: project.trim(),
-        location: location,
-        days: days,
-        slots: slots,
-        created_at: createdAt
-      }),
-    }).catch(err => console.error('خطا در ارسال اطلاعات به n8n:', err.message));
-    res.status(201).json({ ok: true, id: result.rows[0].id });
-  } catch (err) {
+    insertedId = result.rows[0].id;
+    createdAt = result.rows[0].created_at;
+  } catch(err) {
     console.error('خطا در ثبت اطلاعات:', err.message);
-    res.status(500).json({ ok: false, error: 'ثبت اطلاعات با خطا مواجه شد' });
+    return res.status(500).json({ ok: false, error: 'ثبت اطلاعات با خطا مواجه شد'});
   }
-};
+    const n8nWebhookUrl = 'https://evantech.runflare.run/webhook/new_data';
+    try{
+      await fetch(n8nWebhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: insertedId,
+          name: name.trim(),
+          phone: phone.trim(),
+          project: project.trim(),
+          location,
+          days,
+          slots,
+          created_at: createdAt,
+        }),
+      });
+    } catch (err) {
+      console.error('خطا در ارسال اطلاعات به اتوماسیون:', err.message);
+    }
+
+    res.status(201).json({ ok: true, id: insertedId });
+  };
