@@ -1,14 +1,16 @@
 :root {
-    --bg: #0a0a0b;
-    --panel: #151517;
-    --panel-2: #1e1e21;
-    --stroke: #2a2a2d;
-    --yellow: #f4c61e;
-    --yellow-soft: rgba(244, 198, 30, 0.16);
-    --yellow-dim: rgba(244, 198, 30, 0.35);
-    --white: #f7f7f5;
-    --muted: #9a9a9e;
-    --muted-2: #616166;
+    /* ===== Avan CRM palette (was: dark theme) ===== */
+    --bg: #f7f0e8;              /* was #0a0a0b — now soft cream page background */
+    --panel: #ffffff;           /* was #151517 — now white card/input surface */
+    --panel-2: #f6f1eb;         /* was #1e1e21 — now light beige secondary surface */
+    --stroke: #efe6dc;          /* was #2a2a2d — now soft warm border */
+    --yellow: #c9972e;          /* was #f4c61e — now Avan gold accent */
+    --yellow-soft: rgba(201, 151, 46, 0.14);
+    --yellow-dim: rgba(201, 151, 46, 0.45);
+    --ink: #211c18;             /* NEW — primary dark text (replaces --white's old text role) */
+    --white: #ffffff;           /* now genuinely white — used for text/icons on dark or gold fills */
+    --muted: #948a82;           /* was #9a9a9e — warm taupe, secondary text */
+    --muted-2: #b8afa6;         /* was #616166 — lighter still, hints/placeholders */
     --radius-btn: 14px;
     --radius-card: 20px;
 }
@@ -23,7 +25,7 @@ body {
 }
 body {
     background: var(--bg);
-    color: var(--white);
+    color: var(--ink);
     font-family: "Vazirmatn", sans-serif;
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
@@ -53,7 +55,7 @@ body {
     align-items: center;
     gap: 10px;
     font-size: 11px;
-    color: var(--muted-2);
+    color: var(--muted);
     opacity: 0;
     transition: opacity 0.4s ease;
 }
@@ -68,7 +70,7 @@ body {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--stroke);
+    background: rgba(33, 28, 24, 0.14);
     transition:
         background 0.3s ease,
         transform 0.3s ease;
@@ -78,7 +80,7 @@ body {
     transform: scale(1.3);
 }
 .stepper .dot.done {
-    background: var(--muted-2);
+    background: rgba(33, 28, 24, 0.35);
 }
 
 /* ---------- screens ---------- */
@@ -162,6 +164,7 @@ body {
 .vignette {
     position: absolute;
     inset: 0;
+    /* was a black-to-black vignette for a dark hero; now fades to the cream page bg */
     background:
         radial-gradient(
             ellipse at 50% 38%,
@@ -171,8 +174,8 @@ body {
         ),
         linear-gradient(
             to bottom,
-            rgba(10, 10, 11, 0.2) 0%,
-            rgba(10, 10, 11, 0.55) 62%,
+            rgba(247, 240, 232, 0.15) 0%,
+            rgba(247, 240, 232, 0.65) 62%,
             var(--bg) 100%
         );
     pointer-events: none;
@@ -195,8 +198,9 @@ body {
 .hero-logo{
   height:48px;
   width:auto;
-  filter: brightness(5);
-  /*filter:brightness(1.2) saturate(1.4) drop-shadow(0 2px 10px rgba(0,0,0.6));*/
+  /* was filter:brightness(5) to force the logo white on a black hero;
+     on the cream hero the logo keeps its natural ink/gold tone */
+  filter: drop-shadow(0 1px 3px rgba(33, 28, 24, 0.15));
 }
 .hero-bottom {
     position: relative;
@@ -206,7 +210,7 @@ body {
 }
 .headline {
     font-size: 27px;
-    color: #f4c61e;
+    color: var(--yellow);
     font-weight: 800;
     line-height: 1.35;
     margin-bottom: 8px;
@@ -215,7 +219,8 @@ body {
 .subtext {
     font-size: 14.5px;
     font-weight: 500;
-    color: #eeeef3;
+    color: var(--ink);
+    opacity: 0.72;
     line-height: 1.7;
     margin-bottom: 22px;
     max-width: 340px;
@@ -226,14 +231,15 @@ body {
     padding: 20px 22px;
     margin-bottom: 16px;
     border-radius: 15px;
-    background: rgba(10, 10, 11, 0.1);
+    /* was a dark frosted panel; now a light frosted glass card */
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(13px) saturate(160%);
     -webkit-backdrop-filter: blur(13px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.7);
     box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.14),
-        inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+        0 12px 30px rgba(33, 28, 24, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 0 0 1px rgba(33, 28, 24, 0.04);
 }
 .glass-shine {
     position: absolute;
@@ -243,7 +249,7 @@ body {
     height: 160%;
     background: radial-gradient(
         circle at 75% 20%,
-        rgba(255, 255, 255, 0.03),
+        rgba(255, 255, 255, 0.5),
         transparent 55%
     );
     mix-blend-mode: overlay;
@@ -253,8 +259,10 @@ body {
 /* ---------- primary button (shared) ---------- */
 .btn-primary {
     width: 100%;
-    background: var(--white);
-    color: var(--bg);
+    /* was white bg / dark text (for a dark theme); now dark ink pill / cream text,
+       matching the Avan CRM "ادامه" button */
+    background: var(--ink);
+    color: var(--white);
     border: none;
     border-radius: var(--radius-btn);
     padding: 17px 20px;
@@ -269,6 +277,9 @@ body {
     transition:
         transform 0.18s ease,
         background 0.25s ease;
+}
+.btn-primary:hover {
+    background: #3a322b;
 }
 .btn-primary:active {
     transform: scale(0.97);
@@ -333,26 +344,28 @@ body {
     font-weight: 600;
 }
 .field input {
-    background: var(--panel);
+    background: var(--panel-2);
     border: 2px solid var(--stroke);
     border-radius: 14px;
     padding: 15px 16px;
-    color: var(--white);
+    color: var(--ink);
     font-family: "Vazirmatn", sans-serif;
     font-size: 14.5px;
     font-weight: 500;
     outline: none;
     transition:
         border-color 0.2s ease,
-        background 0.2s ease;
+        background 0.2s ease,
+        box-shadow 0.2s ease;
     width: 100%;
 }
 .field input::placeholder {
     color: var(--muted-2);
 }
 .field input:focus {
-    border-color: var(--yellow-dim);
-    background: var(--panel-2);
+    border-color: var(--yellow);
+    background: var(--panel);
+    box-shadow: 0 0 0 3px var(--yellow-soft);
 }
 .field input.tel {
     direction: ltr;
@@ -362,7 +375,7 @@ body {
 }
 .field .err {
     font-size: 11.5px;
-    color: var(--yellow);
+    color: #c0392b;
     min-height: 14px;
     display: none;
 }
@@ -381,11 +394,11 @@ body {
   border-radius:14px;
   overflow:hidden;
   border:1.5px solid var(--stroke);
-  background:var(--panel);
+  background:var(--panel-2);
 }
 .map-hint{
   font-size:11.5px;
-  color:var(--muted-2);
+  color:var(--muted);
   margin-bottom:8px;
 }
 .coords-display{
@@ -410,10 +423,11 @@ body {
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 4px;
+    color: var(--ink);
 }
 .q-sub {
     font-size: 12px;
-    color: var(--muted-2);
+    color: var(--muted);
     margin-bottom: 14px;
 }
 .chip-grid {
@@ -483,7 +497,7 @@ body {
         box-shadow: 0 0 0 0 var(--yellow-soft);
     }
     100% {
-        box-shadow: 0 0 0 26px rgba(244, 198, 30, 0);
+        box-shadow: 0 0 0 26px rgba(201, 151, 46, 0);
     }
 }
 .circle-path {
@@ -520,6 +534,7 @@ body {
     font-size: 23px;
     font-weight: 800;
     margin-bottom: 10px;
+    color: var(--ink);
     opacity: 0;
     animation: rise 0.5s 0.9s ease forwards;
 }
@@ -565,11 +580,12 @@ body {
     border-bottom: none;
 }
 .summary-row .k {
-    color: var(--muted-2);
+    color: var(--muted);
 }
 .summary-row .v {
     font-weight: 600;
     font-family: "JetBrains Mono", monospace;
+    color: var(--ink);
     direction: ltr;
 }
 .summary-row .v.rtl-v {
